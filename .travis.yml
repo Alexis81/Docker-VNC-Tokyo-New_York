@@ -1,0 +1,25 @@
+sudo: required
+
+services:
+  - docker
+
+language: generic
+
+env:
+- DISTRI=ubuntu DESKTOP=xfce
+
+
+script:
+  - docker build -t alexis81/${DISTRI}-${DESKTOP}-vnc-tokyo -f ./Dockerfile.${DISTRI}.${DESKTOP}_tokyo.vnc .
+  - docker build -t alexis81/${DISTRI}-${DESKTOP}-vnc-new_york -f ./Dockerfile.${DISTRI}.${DESKTOP}_new_york.vnc .
+
+#after_success:
+#  - bash .build/trigger_dockerhub.sh ${DISTRI}-${DESKTOP}-vnc-tokyo
+#  - bash .build/trigger_dockerhub.sh ${DISTRI}-${DESKTOP}-vnc-new_york
+
+## use standard notification to committer
+#notifications:
+#    recipients:
+#      - "testautomatisierung@consol.de"
+#    on_success: change # default: change
+#    on_failure: always # default: always
